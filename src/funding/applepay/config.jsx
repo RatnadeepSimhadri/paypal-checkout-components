@@ -3,6 +3,7 @@
 
 import { PLATFORM, FUNDING } from '@paypal/sdk-constants/src';
 import { ApplePayLogo, LOGO_COLOR } from '@paypal/sdk-logos/src';
+import { getEnableFunding } from '@paypal/sdk-client/src';
 
 import { BUTTON_COLOR, BUTTON_LAYOUT } from '../../constants';
 import { enableLogoCDNExperiment } from '../../lib/getLogoCDNExperiment';
@@ -23,7 +24,7 @@ export function getApplePayConfig() : FundingSourceConfig {
             /** If the JS SDK Script Includes Standalone ApplePay Component the Exclude the ApplePay Button From the Vertical Stack 
              * https://paypal.atlassian.net/browse/DTALTPAY-1232
             */
-           return !components?.includes(FUNDING.APPLEPAY);
+           return !components?.includes(FUNDING.APPLEPAY) && getEnableFunding().includes(FUNDING.APPLEPAY);
         },
 
         platforms: [
